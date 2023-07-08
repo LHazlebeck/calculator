@@ -27,8 +27,9 @@ for (let i = 0; i < numbers.length; i++){
             reset = false;
             displayNum.textContent = numbers[i].id;
         }
-        else if (num1 !== 0 && currentOp != null && displayNum.textContent === 0){
+        else if (num1 !== 0 && currentOp != null && reset === true){
             displayNum.textContent = numbers[i].id;
+            reset = false;
         }
         else {
             displayNum.textContent += numbers[i].id;
@@ -36,21 +37,30 @@ for (let i = 0; i < numbers.length; i++){
     });
 }
 
+let dec = document.querySelector("#dec").addEventListener("click", function(){
+    if(!displayNum.textContent.includes(".")){
+        displayNum.textContent += ".";
+    }
+   // displayNum.textContent = "LOL JK";
+    //reset = true;
+});
+
 let operations = document.querySelectorAll(".op");
 for (let i = 0; i < operations.length; i++){
     operations[i].addEventListener("click", function(){
         if (num2 === null){
-            num1 = parseInt(displayNum.textContent);
+            num1 = parseFloat(displayNum.textContent);
             currentOp = operations[i].id;
             num2 = 0;
             displayNum.textContent = num2;
         }
         else if (num1 !== null && num2 !== null){
             num2 = displayNum.textContent;
-            num1 = round(operator(currentOp, num1, num2), 10);
+            num1 = round(operator(currentOp, parseFloat(num1), parseFloat(num2)), 10);
             num2 = 0;
             displayNum.textContent = num1;
             currentOp = operations[i].id;
+            reset = true;
         }
     });
 }
@@ -59,14 +69,13 @@ let equals = document.querySelector('#equals').addEventListener("click", functio
     if (num1 !== null && currentOp !== null && num2 !== null){
         reset = true;
         num2 = displayNum.textContent;
-        if(num2 === 0 && currentOp === "div"){
+        if(parseFloat(num2) === 0 && currentOp === "div"){
             displayNum.textContent = "Nice try, bud";
         }
-        num1 = round(operator(currentOp, num1, num2), 10);
-        if (num1 === "He tried it"){
+        num1 = round(operator(currentOp, parseFloat(num1), parseFloat(num2)), 10);
+        if (displayNum.textContent === "Nice try, bud"){
             num1 = 0;
             num2 = null;
-            displayNum.textContent = "Nice try, bud";
             currentOp = null;
         }
         else {
@@ -79,7 +88,7 @@ let equals = document.querySelector('#equals').addEventListener("click", functio
 
 
 function add(a, b){
-    return parseInt(a)+parseInt(b);
+    return a+b;
 }
 
 function subtract(a, b){
