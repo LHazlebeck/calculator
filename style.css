@@ -8,11 +8,22 @@ body {
     flex: 1;
     flex-direction: column;
     justify-content: center;
-    background-color: #145d14;
+    background-color: black;
     margin: 28px;
     margin-left: 30%;
     margin-right: 30%;
     gap: 12px;
+}
+
+#container {
+    display: flex;
+    flex: 0.8 0.8 0.8;
+    justify-content: center;
+    flex-direction: column;
+    background-color:#145d14;
+    padding: 5%;
+    gap: 16px;
+    border-radius: 16px;
 }
 
 .row {
