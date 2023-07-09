@@ -40,6 +40,7 @@ for (let i = 0; i < numbers.length; i++){
 let dec = document.querySelector("#dec").addEventListener("click", function(){
     if(!displayNum.textContent.includes(".")){
         displayNum.textContent += ".";
+        reset = false;
     }
    // displayNum.textContent = "LOL JK";
     //reset = true;
